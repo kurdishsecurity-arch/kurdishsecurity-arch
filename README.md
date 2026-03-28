@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>FBI Cyber & Critical Case Review | Secure Portal</title>
+  <!-- Google Fonts for professional typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0a0c12;
+      font-family: 'Inter', sans-serif;
+      color: #eef2ff;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #141824;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2a3550;
+      border-radius: 8px;
+    }
+
+    /* main container */
+    .app-wrapper {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* header / navigation */
+    .fbi-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 1.5rem 0 1rem;
+      border-bottom: 1px solid rgba(48, 67, 107, 0.6);
+      margin-bottom: 2.5rem;
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .seal-icon {
+      font-size: 2.4rem;
+      color: #b91c1c;
+      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
+    }
+    .title-text h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      background: linear-gradient(135deg, #FFFFFF 0%, #bfc9e6 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .title-text p {
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
+      color: #9aa9c7;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+    .badge {
+      background: rgba(185, 28, 28, 0.2);
+      backdrop-filter: blur(4px);
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      border: 1px solid rgba(185, 28, 28, 0.5);
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    .badge i {
+      margin-right: 6px;
+      color: #e34d4d;
+    }
+
+    /* stats grid */
+    .stats-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+    }
+    .stat-card {
+      background: #0f111a;
+      border-radius: 28px;
+      padding: 1.2rem 1.8rem;
+      flex: 1;
+      min-width: 150px;
+      border: 1px solid #242b3f;
+      backdrop-filter: blur(2px);
+      transition: all 0.2s ease;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+    .stat-card:hover {
+      border-color: #3f4b6e;
+      background: #121624;
+    }
+    .stat-number {
+      font-size: 2.2rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      color: #e0e7ff;
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #8f9bb5;
+    }
+
+    /* two column layout */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    /* cards common style */
+    .card {
+      background: #0e1018;
+      border-radius: 32px;
+      border: 1px solid #20263b;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 12px 30px -12px rgba(0,0,0,0.5);
+    }
+    .card-header {
+      padding: 1.4rem 1.8rem;
+      border-bottom: 1px solid #1e253c;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(10, 12, 20, 0.7);
+    }
+    .card-header i {
+      font-size: 1.6rem;
+      color: #b22234;
+    }
+    .card-header h2 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+    }
+    .card-body {
+      padding: 1.8rem;
+    }
+
+    /* form styles */
+    .form-group {
+      margin-bottom: 1.4rem;
+    }
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 0.5rem;
+      color: #b9c3e0;
+    }
+    input, select, textarea {
+      width: 100%;
+      background: #07090f;
+      border: 1px solid #2a314b;
+      border-radius: 20px;
+      padding: 12px 18px;
+      font-family: 'Inter', monospace;
+      font-size: 0.9rem;
+      color: #f0f3fc;
+      transition: all 0.2s;
+      outline: none;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #b22234;
+      box-shadow: 0 0 0 2px rgba(178, 34, 52, 0.3);
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    .btn-submit {
+      background: linear-gradient(95deg, #9b2226 0%, #b22234 100%);
+      border: none;
+      width: 100%;
+      padding: 14px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 10px;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-submit:hover {
+      background: linear-gradient(95deg, #a5282c, #c02e38);
+      transform: scale(0.98);
+      box-shadow: 0 8px 18px rgba(185, 28, 28, 0.3);
+    }
+
+    /* case list styling */
+    .case-filters {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .filter-chip {
+      background: #11141f;
+      padding: 6px 14px;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid #2a314b;
+      transition: all 0.2s;
+    }
+    .filter-chip.active, .filter-chip:hover {
+      background: #b22234;
+      border-color: #b22234;
+      color: white;
+    }
+    .cases-list {
+      max-height: 440px;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+    .case-item {
+      background: #0a0c14;
+      border-left: 4px solid #3a4468;
+      border-radius: 20px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .case-item:hover {
+      background: #11161f;
+      border-left-color: #b22234;
+    }
+    .case-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    .case-title {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .case-status {
+      font-size: 0.7rem;
+      padding: 3px 12px;
+      border-radius: 50px;
+      background: #1e2538;
+      font-weight: 600;
+    }
+    .status-pending { background: #7b6216; color: #ffeaac; }
+    .status-review { background: #1f5e6e; color: #c0f0ff; }
+    .status-analyzed { background: #1d4d1d; color: #b9f6b9; }
+    .case-desc {
+      font-size: 0.8rem;
+      color: #b7c2e0;
+      margin: 8px 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .case-meta {
+      display: flex;
+      gap: 18px;
+      font-size: 0.7rem;
+      color: #7e89aa;
+    }
+    .empty-message {
+      text-align: center;
+      padding: 2rem;
+      color: #6b728e;
+    }
+
+    /* review modal (lightbox) */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(6px);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: #0e1120;
+      max-width: 550px;
+      width: 90%;
+      border-radius: 36px;
+      border: 1px solid #2c3455;
+      animation: fadeUp 0.2s ease;
+    }
+    @keyframes fadeUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .modal-header {
+      padding: 1.2rem 1.8rem;
+      border-bottom: 1px solid #20263b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-header h3 {
+      font-weight: 600;
+    }
+    .close-modal {
+      background: none;
+      border: none;
+      color: #b9c3e0;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+    .modal-body {
+      padding: 1.6rem 1.8rem;
+    }
+    .review-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 1.5rem;
+    }
+    .btn-review {
+      flex: 1;
+      background: #1f253c;
+      border: none;
+      padding: 10px;
+      border-radius: 40px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .btn-review.approve {
+      background: #1f6e43;
+    }
+    .btn-review.reject {
+      background: #8b3c3c;
+    }
+    .btn-review:hover {
+      filter: brightness(1.1);
+    }
+
+    footer {
+      border-top: 1px solid #1b212f;
+      padding: 2rem 0 2rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #5c678b;
+    }
+
+    @media (max-width: 860px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .app-wrapper {
+        padding: 0 1rem;
+      }
+      .stats-grid {
+        gap: 0.8rem;
+      }
+    }
+
+    button {
+      background: none;
+      border: none;
+    }
+    i, .fas, .far {
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+<div class="app-wrapper">
+  <!-- header -->
+  <div class="fbi-header">
+    <div class="logo-area">
+      <i class="fas fa-shield-haltered seal-icon"></i>
+      <div class="title-text">
+        <h1>FBI CASE REVIEW SYSTEM</h1>
+        <p>Federal Bureau of Investigation â¢ Cyber & Critical Operations</p>
+      </div>
+    </div>
+    <div class="badge">
+      <i class="fas fa-lock"></i> SECURE PORTAL â¢ OFFICIAL USE
+    </div>
+  </div>
+
+  <!-- live stats (dynamic) -->
+  <div class="stats-grid" id="statsGrid">
+    <div class="stat-card"><div class="stat-number" id="totalCases">0</div><div class="stat-label">Total Cases Filed</div></div>
+    <div class="stat-card"><div class="stat-number" id="pendingReview">0</div><div class="stat-label">Pending Review</div></div>
+    <div class="stat-card"><div class="stat-number" id="analyzedCount">0</div><div class="stat-label">Analyzed / Closed</div></div>
+  </div>
+
+  <!-- main grid: submission + case list -->
+  <div class="dashboard-grid">
+    <!-- left: case submission form -->
+    <div class="card">
+      <div class="card-header">
+        <i class="fas fa-folder-open"></i>
+        <h2>Submit intelligence / case file</h2>
+      </div>
+      <div class="card-body">
+        <form id="caseForm">
+          <div class="form-group">
+            <label><i class="fas fa-tag"></i> Case title / subject</label>
+            <input type="text" id="caseTitle" placeholder="e.g., Digital intrusion attempt / Threat analysis" required>
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-balance-scale"></i> Case type</label>
+            <select id="caseType">
+              <option value="Cyber Crime">Cyber Crime</option>
+              <option value="Counterterrorism">Counterterrorism</option>
+              <option value="Organized Crime">Organized Crime</option>
+              <option value="Public Corruption">Public Corruption</option>
+              <option value="Other Federal">Other Federal</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-align-left"></i> Incident description / evidence summary</label>
+            <textarea id="caseDesc" placeholder="Provide concise details, timestamps, involved parties, and potential threat level..."></textarea>
+          </div>
+          <button type="submit" class="btn-submit"><i class="fas fa-upload"></i> SUBMIT FOR REVIEW</button>
+        </form>
+        <div style="margin-top: 16px; font-size: 0.7rem; text-align: center; color:#5a6991;">
+          <i class="fas fa-database"></i> All submissions are encrypted and logged for federal review.
+        </div>
+      </div>
+    </div>
+
+    <!-- right: case management & review panel -->
+    <div class="card">
+      <div class="card-header">
+        <i class="fas fa-clipboard-list"></i>
+        <h2>Active case queue & review</h2>
+      </div>
+      <div class="card-body">
+        <div class="case-filters">
+          <div class="filter-chip active" data-filter="all">All cases</div>
+          <div class="filter-chip" data-filter="pending">Pending</div>
+          <div class="filter-chip" data-filter="review">In review</div>
+          <div class="filter-chip" data-filter="analyzed">Analyzed</div>
+        </div>
+        <div id="casesContainer" class="cases-list">
+          <!-- dynamic cases injected -->
+          <div class="empty-message"><i class="fas fa-info-circle"></i> Loading case database...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <i class="fas fa-copyright"></i> Federal Bureau of Investigation â Unauthorized access prohibited. This interface simulates case management & review workflow.
+  </footer>
+</div>
+
+<!-- Modal for detailed review -->
+<div id="reviewModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3><i class="fas fa-gavel"></i> Case review panel</h3>
+      <button class="close-modal" id="closeModalBtn">&times;</button>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <!-- dynamic content -->
+    </div>
+  </div>
+</div>
+
+<script>
+  // ---------- FBI Case Management System ----------
+  // Case statuses: 'pending' (just submitted), 'review' (agent reviewing), 'analyzed' (review completed)
+  let cases = [];
+
+  // load demo initial data
+  function initDemoCases() {
+    const stored = localStorage.getItem('fbi_cases_db');
+    if(stored) {
+      cases = JSON.parse(stored);
+    } else {
+      cases = [
+        { id: 'FX-2401', title: 'Dark Web Trafficking Ring', type: 'Organized Crime', description: 'Suspects using encrypted markets to move assets. Intel from field office.', status: 'pending', date: '2025-02-10' },
+        { id: 'FX-2402', title: 'Ransomware Attack on Energy Grid', type: 'Cyber Crime', description: 'BlackCat group claimed responsibility. Need forensic review of artifacts.', status: 'review', date: '2025-02-14' },
+        { id: 'FX-2403', title: 'Foreign Interference Operation', type: 'Counterterrorism', description: 'Social media influence campaign targeting elections. Cross-reference with CI.', status: 'analyzed', date: '2025-02-01' },
+        { id: 'FX-2404', title: 'Bank Fraud Conspiracy', type: 'Public Corruption', description: 'Insider trading and shell companies. Transaction logs attached.', status: 'pending', date: '2025-02-17' }
+      ];
+      saveToLocal();
+    }
+    updateStatsAndRender();
+  }
+
+  function saveToLocal() {
+    localStorage.setItem('fbi_cases_db', JSON.stringify(cases));
+  }
+
+  // generate new ID (simple)
+  function generateCaseId() {
+    const lastNum = cases.length + 101;
+    return `FBIC-${new Date().getFullYear()}-${lastNum}`;
+  }
+
+  // add case
+  function addCase(title, type, description) {
+    const newCase = {
+      id: generateCaseId(),
+      title: title.trim(),
+      type: type,
+      description: description.trim(),
+      status: 'pending',    // initial status
+      date: new Date().toISOString().slice(0,10)
+    };
+    cases.unshift(newCase);
+    saveToLocal();
+    updateStatsAndRender();
+  }
+
+  // update case status (review outcome)
+  function updateCaseStatus(caseId, newStatus) {
+    const idx = cases.findIndex(c => c.id === caseId);
+    if(idx !== -1) {
+      cases[idx].status = newStatus;
+      saveToLocal();
+      updateStatsAndRender();
+    }
+  }
+
+  // statistics
+  function computeStats() {
+    const total = cases.length;
+    const pending = cases.filter(c => c.status === 'pending').length;
+    const reviewed = cases.filter(c => c.status === 'review').length;
+    const analyzed = cases.filter(c => c.status === 'analyzed').length;
+    return { total, pending, reviewed, analyzed };
+  }
+
+  function updateStatsAndRender() {
+    const stats = computeStats();
+    document.getElementById('totalCases').innerText = stats.total;
+    document.getElementById('pendingReview').innerText = stats.pending + stats.reviewed; // active review queue = pending+inreview
+    document.getElementById('analyzedCount').innerText = stats.analyzed;
+    renderCasesList(getCurrentFilter());
+  }
+
+  let currentFilter = 'all';
+  function getCurrentFilter() {
+    return currentFilter;
+  }
+
+  function setFilter(filter) {
+    currentFilter = filter;
+    renderCasesList(filter);
+    // update active UI
+    document.querySelectorAll('.filter-chip').forEach(chip => {
+      if(chip.dataset.filter === filter) chip.classList.add('active');
+      else chip.classList.remove('active');
+    });
+  }
+
+  function renderCasesList(filter) {
+    const container = document.getElementById('casesContainer');
+    let filteredCases = [...cases];
+    if(filter === 'pending') filteredCases = filteredCases.filter(c => c.status === 'pending');
+    else if(filter === 'review') filteredCases = filteredCases.filter(c => c.status === 'review');
+    else if(filter === 'analyzed') filteredCases = filteredCases.filter(c => c.status === 'analyzed');
+
+    if(filteredCases.length === 0) {
+      container.innerHTML = `<div class="empty-message"><i class="fas fa-folder-open"></i> No cases match filter. Submit a new case.</div>`;
+      return;
+    }
+
+    container.innerHTML = filteredCases.map(c => {
+      let statusClass = '';
+      if(c.status === 'pending') statusClass = 'status-pending';
+      else if(c.status === 'review') statusClass = 'status-review';
+      else statusClass = 'status-analyzed';
+      let statusLabel = c.status === 'pending' ? 'PENDING' : (c.status === 'review' ? 'IN REVIEW' : 'ANALYZED');
+      return `
+        <div class="case-item" data-case-id="${c.id}">
+          <div class="case-header">
+            <span class="case-title"><i class="fas fa-folder"></i> ${escapeHtml(c.title)}</span>
+            <span class="case-status ${statusClass}">${statusLabel}</span>
+          </div>
+          <div class="case-desc">${escapeHtml(c.description.substring(0, 100))}${c.description.length > 100 ? 'â¦' : ''}</div>
+          <div class="case-meta">
+            <span><i class="fas fa-hashtag"></i> ${c.id}</span>
+            <span><i class="fas fa-layer-group"></i> ${c.type}</span>
+            <span><i class="fas fa-calendar-alt"></i> ${c.date}</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // attach event listeners for each case item to open review modal
+    document.querySelectorAll('.case-item').forEach(el => {
+      el.addEventListener('click', (e) => {
+        // stop if clicking inside buttons? but there are no inner buttons, full item click opens modal
+        const caseId = el.getAttribute('data-case-id');
+        openReviewModal(caseId);
+      });
+    });
+  }
+
+  // simple escape to prevent XSS
+  function escapeHtml(str) {
+    if(!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if(m === '&') return '&amp;';
+      if(m === '<') return '&lt;';
+      if(m === '>') return '&gt;';
+      return m;
+    }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+      return c;
+    });
+  }
+
+  // Modal review logic
+  let currentModalCaseId = null;
+  const modal = document.getElementById('reviewModal');
+  const modalBody = document.getElementById('modalBody');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+
+  function openReviewModal(caseId) {
+    const caseData = cases.find(c => c.id === caseId);
+    if(!caseData) return;
+    currentModalCaseId = caseId;
+    // build detailed view with review options based on status
+    let statusOptions = '';
+    if(caseData.status === 'pending') {
+      statusOptions = `
+        <div class="review-actions">
+          <button class="btn-review approve" data-action="review">Start official review â</button>
+          <button class="btn-review reject" data-action="pending-hold">Flag for secondary (no change)</button>
+        </div>
+        <small style="display:block; margin-top:12px;">* Start review moves case to "IN REVIEW" status.</small>
+      `;
+    } else if(caseData.status === 'review') {
+      statusOptions = `
+        <div class="review-actions">
+          <button class="btn-review approve" data-action="analyzed">Approve & Close (Analyzed)</button>
+          <button class="btn-review reject" data-action="pending">Return to Pending</button>
+        </div>
+        <small>Finalize analysis or send back for more details.</small>
+      `;
+    } else {
+      statusOptions = `
+        <div class="review-actions">
+          <button class="btn-review" data-action="noop" disabled style="opacity:0.7;">Case closed â final report available</button>
+        </div>
+        <small>This case has been fully analyzed. Archived in FBI records.</small>
+      `;
+    }
+
+    modalBody.innerHTML = `
+      <div style="margin-bottom: 1rem;">
+        <h4 style="font-size:1.2rem;">${escapeHtml(caseData.title)}</h4>
+        <div style="display: flex; gap: 12px; margin: 10px 0;"><span><i class="fas fa-id-card"></i> ${caseData.id}</span><span><i class="fas fa-chart-line"></i> ${caseData.type}</span><span><i class="fas fa-clock"></i> Filed: ${caseData.date}</span></div>
+        <div style="background:#080b12; border-radius: 20px; padding: 1rem; margin: 16px 0;">
+          <strong><i class="fas fa-file-alt"></i> Full case summary:</strong><br>
+          ${escapeHtml(caseData.description)}
+        </div>
+        <div><strong>Current status:</strong> <span style="background:#1f253c; padding:2px 12px; border-radius:40px;">${caseData.status.toUpperCase()}</span></div>
+      </div>
+      ${statusOptions}
+    `;
+    modal.style.display = 'flex';
+
+    // attach action buttons dynamically
+    const approveBtn = modalBody.querySelector('.btn-review.approve');
+    const rejectBtn = modalBody.querySelector('.btn-review.reject');
+    if(approveBtn && approveBtn.dataset.action) {
+      approveBtn.onclick = () => handleReviewAction(caseData.id, approveBtn.dataset.action);
+    }
+    if(rejectBtn && rejectBtn.dataset.action) {
+      rejectBtn.onclick = () => handleReviewAction(caseData.id, rejectBtn.dataset.action);
+    }
+  }
+
+  function handleReviewAction(caseId, action) {
+    if(action === 'review') {
+      updateCaseStatus(caseId, 'review');
+      closeModal();
+    } else if(action === 'analyzed') {
+      updateCaseStatus(caseId, 'analyzed');
+      closeModal();
+    } else if(action === 'pending') {
+      updateCaseStatus(caseId, 'pending');
+      closeModal();
+    } else if(action === 'pending-hold') {
+      // just keep pending
+      closeModal();
+    } else {
+      closeModal();
+    }
+  }
+
+  function closeModal() {
+    modal.style.display = 'none';
+    currentModalCaseId = null;
+  }
+
+  // form submission
+  const form = document.getElementById('caseForm');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const title = document.getElementById('caseTitle').value;
+    const type = document.getElementById('caseType').value;
+    const desc = document.getElementById('caseDesc').value;
+    if(!title.trim() || !desc.trim()) {
+      alert("FBI requires both case title and description.");
+      return;
+    }
+    addCase(title, type, desc);
+    form.reset();
+    // small visual feedback
+    const btn = form.querySelector('.btn-submit');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-check-circle"></i> SUBMITTED';
+    setTimeout(() => { btn.innerHTML = originalText; }, 1500);
+    setFilter('all'); // show all cases including new
+  });
+
+  // filter chips listeners
+  document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', (e) => {
+      const filterVal = chip.dataset.filter;
+      setFilter(filterVal);
+    });
+  });
+
+  // close modal on outside click or X
+  window.addEventListener('click', (e) => {
+    if(e.target === modal) closeModal();
+  });
+  closeModalBtn.addEventListener('click', closeModal);
+
+  // init
+  initDemoCases();
+</script>
+</body>
+</html>
